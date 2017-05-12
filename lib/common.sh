@@ -13,6 +13,7 @@ FilesJSON="${buildpack}/files.json"
 godepsJSON="${build}/Godeps/Godeps.json"
 vendorJSON="${build}/vendor/vendor.json"
 glideYAML="${build}/glide.yaml"
+gpmConfig="${build}/Godeps"
 
 steptxt="----->"
 YELLOW='\033[1;33m'
@@ -210,6 +211,9 @@ determineTool() {
         fi
     elif [ -f "${glideYAML}" ]; then
         TOOL="glide"
+        setGoVersionFromEnvironment
+    elif [ -f "${gpmConfig}" ]; then
+        TOOL="gpm"
         setGoVersionFromEnvironment
     elif [ -d "$build/src" -a -n "$(find "$build/src" -mindepth 2 -type f -name '*.go' | sed 1q)" ]; then
         TOOL="gb"

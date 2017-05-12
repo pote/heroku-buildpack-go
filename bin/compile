@@ -26,6 +26,7 @@ needConcurrency() {
 }
 
 handleDefaultPkgSpec() {
+    echo  "TOOL: ${TOOL}"
     if [ "${pkgs}" = "default" ]; then
         warn "Installing package '.' (default)"
         warn ""
@@ -145,6 +146,7 @@ ensureGlide() {
     fi
 }
 
+
 ensureGB() {
     local gbVersion="${1}"
     GOPATH="${cache}/gb/${gbVersion}"
@@ -169,6 +171,11 @@ ensureGB() {
             popd &> /dev/null
         finished
     fi
+}
+
+ensureGPM() {
+  GOPATH="${cache}/.dependencies:${build}"
+  echo "-> ${GOPATH}"
 }
 
 ensureGo() {
@@ -423,6 +430,14 @@ case "${TOOL}" in
             mv "$f" "${f/-heroku}"
         done
         rm -rf pkg
+    ;;
+    gpm)
+        ensureGPM
+        cd $build
+        step "Running: gpm install"
+        $buildpack/vendor/gpm/gpm install 2>&1
+
+        make clean all
     ;;
 esac
 

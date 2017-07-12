@@ -435,9 +435,9 @@ case "${TOOL}" in
         ensureGPM
         cd $build
         step "Running: gpm install"
-        $buildpack/vendor/gpm/gpm install 2>&1
+        $buildpack/vendor/gpm/gpm get  2>&1
 
-        make clean all
+        make
     ;;
 esac
 

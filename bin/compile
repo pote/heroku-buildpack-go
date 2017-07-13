@@ -437,7 +437,7 @@ case "${TOOL}" in
         step "Running: gpm install"
         $buildpack/vendor/gpm/gpm get  2>&1
 
-        go build
+        make heroku
     ;;
 esac
 

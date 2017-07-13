@@ -65,6 +65,14 @@ case "${TOOL}" in
             gb test -run=_ -bench=. -benchmem -v 2>&1
         fi
     ;;
+    gpm)
+        cd "${build}"
+        step "Running: gpm install"
+        $buildpack/vendor/gpm/gpm get 2>&1
+
+        step "Running: go test"
+        go test 2>&1
+    ;;
     *)
         warn "Testing is not supported for ${TOOL}"
     ;;

@@ -68,10 +68,10 @@ case "${TOOL}" in
     gpm)
         cd "${build}"
         step "Running: gpm install"
-        $buildpack/vendor/gpm/gpm get 2>&1
+        GOPATH="${cache}/.dependencies:${build}" $buildpack/vendor/gpm/gpm get 2>&1
 
         step "Running: go test ./..."
-        go test ./... 2>&1
+        GOPATH="${cache}/.dependencies:${build}" go test ./... 2>&1
     ;;
     *)
         warn "Testing is not supported for ${TOOL}"

@@ -70,8 +70,8 @@ case "${TOOL}" in
         step "Running: gpm install"
         $buildpack/vendor/gpm/gpm get 2>&1
 
-        step "Running: go test"
-        go test 2>&1
+        step "Running: go test ./..."
+        go test ./... 2>&1
     ;;
     *)
         warn "Testing is not supported for ${TOOL}"

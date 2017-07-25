@@ -25,7 +25,7 @@ if [ -f "${build}/.heroku/go/.meta" ]; then
   source "${build}/.heroku/go/.meta"
 fi
 
-export GOPATH="${build}"
+export GOPATH="${cache}/.dependencies:${build}"
 export GOROOT="${build}/.heroku/go"
 PATH="${GOPATH}/bin:${GOROOT}/bin:${PATH}"
 

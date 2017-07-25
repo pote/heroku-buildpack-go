@@ -66,9 +66,9 @@ case "${TOOL}" in
         fi
     ;;
     gpm)
-        cd "${build}"
+        cd "/app"
         step "Running: gpm install"
-        GOPATH="${cache}/.dependencies:${build}" $buildpack/vendor/gpm/gpm get 2>&1
+        GOPATH="${cache}/.dependencies:${build}" $buildpack/vendor/gpm/gpm get 3>&1
 
         step "Running: go test ./..."
         GOPATH="${cache}/.dependencies:${build}" go test ./... 2>&1

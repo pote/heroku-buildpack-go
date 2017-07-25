@@ -175,7 +175,7 @@ ensureGB() {
 
 ensureGPM() {
   GOPATH="${cache}/.dependencies:${build}"
-  echo "-> ${GOPATH}"
+  echo "gpm GOPATH-> ${GOPATH}"
 }
 
 ensureGo() {
@@ -434,7 +434,7 @@ case "${TOOL}" in
     gpm)
         ensureGPM
         cd $build
-        step "Running: gpm install"
+        step "Running: gpm get"
         $buildpack/vendor/gpm/gpm get  2>&1
 
         go build -o app

@@ -66,12 +66,20 @@ case "${TOOL}" in
         fi
     ;;
     gpm)
-        cd "/app"
-        step "Running: gpm install"
-        GOPATH="${cache}/.dependencies:${build}" $buildpack/vendor/gpm/gpm get 3>&1
+        GOPATH="${cache}/.dependencies:${build}"
+        step "gpm GOPATH-> ${GOPATH}"
+
+        cd $build
+        step "cd into $build"
+
+        step "Running: gpm get from $buidlpack/vendor/gpm/gpm"
+        $buildpack/vendor/gpm/gpm get 2>&1
+
+        step "Running go build -o app"
+        go build -o app
 
         step "Running: go test ./..."
-        GOPATH="${cache}/.dependencies:${build}" go test ./... 2>&1
+        go test ./... 2>&1
     ;;
     *)
         warn "Testing is not supported for ${TOOL}"

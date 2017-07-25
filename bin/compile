@@ -174,7 +174,7 @@ ensureGB() {
 }
 
 ensureGPM() {
-  GOPATH="${cache}/.dependencies:${build}"
+  GOPATH="${build}/.dependencies:${build}"
   echo "gpm GOPATH-> ${GOPATH}"
 }
 
@@ -470,8 +470,8 @@ if [ "${GO_SETUP_GOPATH_IN_IMAGE}" = "true" ]; then
     start "Cleaning up \$GOPATH/pkg"
         rm -rf $GOPATH/pkg
     finished
-    echo 'export GOPATH=$HOME' > "${build}/.profile.d/zzgopath.sh"  #Try to make sure it's down in towards the end
-    echo 'cd $GOPATH/src/'${name} >> "${build}/.profile.d/zzgopath.sh" # because of this
+    echo "export GOPATH=${build}/.dependencies:${build}" > "${build}/.profile.d/zzgopath.sh"
+    echo "cd ${build}" >> "${build}/.profile.d/zzgopath.sh"
 fi
 
 if needConcurrency ${ver}; then

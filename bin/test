@@ -79,7 +79,7 @@ case "${TOOL}" in
         go build -o app
 
         step "Running: go test ./..."
-        go test ./... 2>&1
+        go test -p=1 ./... 2>&1
     ;;
     *)
         warn "Testing is not supported for ${TOOL}"
